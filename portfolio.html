@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerollos AbdulMasih | Backend & Data Engineer Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Configure Tailwind for custom colors and font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#121212',
+                        'secondary-dark': '#1e1e1e',
+                        'accent-blue': '#3b82f6', // Tailwind blue-500
+                        'text-light': '#e0e0e0',
+                        'text-muted': '#b0b0b0',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom CSS for Skill Bars and smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        .skill-bar-inner {
+            width: 0; /* Initial width for animation */
+            transition: width 1.5s ease-out;
+        }
+        .animate-skill-bar {
+            /* This class will be added by JS to start the animation */
+            width: var(--skill-level) !important;
+        }
+        /* Style for project card hover effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-primary-dark text-text-light font-sans antialiased">
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-secondary-dark/95 backdrop-blur-sm shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <a href="#hero" class="text-2xl font-bold text-accent-blue hover:text-white transition duration-300">Kerollos.dev</a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-text-light hover:text-accent-blue transition duration-300">About</a>
+                <a href="#skills" class="text-text-light hover:text-accent-blue transition duration-300">Skills</a>
+                <a href="#projects" class="text-text-light hover:text-accent-blue transition duration-300">Projects</a>
+                <a href="#education" class="text-text-light hover:text-accent-blue transition duration-300">Experience</a>
+                <a href="#contact" class="px-4 py-1 border border-accent-blue rounded-full text-accent-blue hover:bg-accent-blue hover:text-white transition duration-300">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 text-text-light hover:text-accent-blue rounded-lg transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </nav>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary-dark p-4 border-t border-text-muted/10">
+            <a href="#about" class="block py-2 text-text-light hover:text-accent-blue transition duration-300" onclick="closeMobileMenu()">About</a>
+            <a href="#skills" class="block py-2 text-text-light hover:text-accent-blue transition duration-300" onclick="closeMobileMenu()">Skills</a>
+            <a href="#projects" class="block py-2 text-text-light hover:text-accent-blue transition duration-300" onclick="closeMobileMenu()">Projects</a>
+            <a href="#education" class="block py-2 text-text-light hover:text-accent-blue transition duration-300" onclick="closeMobileMenu()">Experience</a>
+            <a href="#contact" class="block py-2 text-accent-blue hover:text-white transition duration-300" onclick="closeMobileMenu()">Contact</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto pt-16">
+        
+        <!-- 1. Hero Section (Introduction) -->
+        <section id="hero" class="min-h-[calc(100vh-64px)] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-16">
+            <div class="space-y-6">
+                
+                <!-- PERSONAL PHOTO -->
+                <div class="mb-8 flex justify-center">
+                    <img id="profile-photo" 
+                         src="https://media.licdn.com/dms/image/v2/D4D03AQEV0xa6fH0-fQ/profile-displayphoto-crop_800_800/B4DZl.fp7MJIAI-/0/1758763861500?e=1762387200&v=beta&t=___miUsarP0zHgiHCMexWDdm_zo9z32NScwHpy6jZys" 
+                         alt="Kerollos AbdulMasih Profile" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/150x150/1e1e1e/b0b0b0?text=Kerollos';"
+                         class="w-40 h-40 rounded-full object-cover border-4 border-accent-blue shadow-lg transition duration-500 hover:scale-105">
+                </div>
+                <!-- END PERSONAL PHOTO -->
+
+                <p class="text-lg text-accent-blue font-medium uppercase tracking-widest animate-pulse">Hello, I'm Kerollos AbdulMasih</p>
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight">
+                    <span class="block text-white">Backend & Data Engineer</span>
+                    <span class="block text-text-muted text-4xl sm:text-5xl lg:text-6xl mt-2">(Node.js | Python | SQL)</span>
+                </h1>
+                <p class="text-xl max-w-3xl mx-auto text-text-muted leading-relaxed">
+                    Certified Data Engineer with a strong foundation in **Node.js, SQL, and Python**. I specialize in building robust **RESTful APIs** and developing **scalable ETL pipelines** for data analytics and machine learning projects.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 pt-6">
+                    <a href="#projects" class="bg-accent-blue hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-[1.02] transition duration-300">
+                        View My Projects
+                    </a>
+                    <a href="https://www.linkedin.com/in/kerolloss/" target="_blank" rel="noopener noreferrer" class="bg-secondary-dark border border-accent-blue text-accent-blue hover:bg-accent-blue hover:text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-[1.02] transition duration-300">
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About Section -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-secondary-dark rounded-xl mx-4 my-12 shadow-2xl">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">About Me</h2>
+            <div class="max-w-4xl mx-auto space-y-6 text-lg text-text-muted">
+                <p>
+                    I am a passionate Backend & Data Engineer currently pursuing a degree from the Faculty of Computers and Artificial Intelligence at the University of Sadat City. My academic background, combined with self-study and professional certifications, has equipped me with a unique skill set that bridges software engineering and data analysis.
+                </p>
+                <p>
+                    My experience includes developing Python scripts for data preprocessing, building small-scale **ETL pipelines** during internships, and designing functional **RESTful APIs** using **Node.js (Express.js)** and **MySQL/PostgreSQL**. I am driven by the challenge of creating scalable, clean, and efficient systems.
+                </p>
+                <p>
+                    I hold certifications such as **Associate Data Engineer (DataCamp)** and **AWS Cloud Foundations**, ensuring I apply industry-best practices in data modeling, cloud technologies, and backend architecture.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Technical Toolkit</h2>
+            
+            <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+
+                <!-- Backend Development -->
+                <div class="bg-secondary-dark p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-accent-blue flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-server-cog mr-3"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><path d="M12 18h.01"/><path d="M17.5 22c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25-1.25.56-1.25 1.25.56 1.25 1.25 1.25Z"/><path d="M17.5 2.5v1.5"/><path d="M17.5 8v-1.5"/><path d="M14.88 3.3l-.96.96"/><path d="M19.12 6.7l-.96-.96"/><path d="M14.88 6.7l-.96-.96"/><path d="M19.12 3.3l-.96.96"/></svg>
+                        Backend Development
+                    </h3>
+                    <div id="backend-skills" class="space-y-4">
+                        <!-- Skill items will be rendered here by JS -->
+                    </div>
+                </div>
+
+                <!-- Data Engineering -->
+                <div class="bg-secondary-dark p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-accent-blue flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database-zap mr-3"><path d="M12 2v2"/><path d="M6.34 6.34l1.42 1.42"/><path d="M3 10h2"/><path d="M18.66 6.34l-1.42 1.42"/><path d="M17 10h4"/><path d="M12 22s8-3 8-10H4s8 3 8 10Z"/><path d="M12 10a4 4 0 0 1-4 4"/></svg>
+                        Data Engineering
+                    </h3>
+                    <div id="data-skills" class="space-y-4">
+                        <!-- Skill items will be rendered here by JS -->
+                    </div>
+                </div>
+
+                <!-- Cloud & Tools -->
+                <div class="md:col-span-2 bg-secondary-dark p-8 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-6 text-accent-blue flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud mr-3"><path d="M17.5 19H17a4.5 4.5 0 1 0-8.8-1.28c-.37.31-.76.65-1.15.99C6.4 19.46 5.5 20 4 20a4 4 0 0 1 0-8h1.22"/><path d="M22 10a4 4 0 0 0-4-4h-2.17c-.36-1.1-1.28-2-2.3-2-.76 0-1.4.3-1.8.8"/></svg>
+                        Cloud & Tools
+                    </h3>
+                    <div id="cloud-skills" class="space-y-4 max-w-3xl mx-auto">
+                        <!-- Skill items will be rendered here by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 4. Projects Section -->
+        <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-secondary-dark/50 my-12">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Featured Projects</h2>
+            <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Projects will be rendered here by JS -->
+            </div>
+        </section>
+        
+        <!-- 5. Experience & Education Section -->
+        <section id="education" class="py-20 px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Experience & Education</h2>
+
+            <div class="max-w-4xl mx-auto space-y-16">
+                
+                <!-- Education -->
+                <div>
+                    <h3 class="text-3xl font-semibold mb-6 text-accent-blue border-b border-text-muted/20 pb-2">Education & Certifications</h3>
+                    <div class="space-y-8">
+                        <!-- Education Item -->
+                        <div class="bg-secondary-dark p-6 rounded-xl shadow-lg border-l-4 border-accent-blue">
+                            <p class="text-sm font-medium text-text-muted mb-1">10/2020 - 06/2024 | Sadat City, Egypt</p>
+                            <h4 class="text-xl font-bold text-white">Faculty of Computers and Artificial Intelligence</h4>
+                            <p class="text-lg text-text-light">University of Sadat City</p>
+                            <p class="text-md text-text-muted mt-1">GPA: 3.15</p>
+                        </div>
+                        <!-- Certification Item -->
+                        <div class="bg-secondary-dark p-6 rounded-xl shadow-lg border-l-4 border-text-muted">
+                            <p class="text-sm font-medium text-text-muted mb-1">2024</p>
+                            <h4 class="text-xl font-bold text-white">Certified as an Associate Data Engineer</h4>
+                            <p class="text-lg text-text-light">DataCamp</p>
+                        </div>
+                        <!-- Certification Item -->
+                        <div class="bg-secondary-dark p-6 rounded-xl shadow-lg border-l-4 border-text-muted">
+                            <p class="text-sm font-medium text-text-muted mb-1">AWS</p>
+                            <h4 class="text-xl font-bold text-white">AWS Cloud Foundations Certified</h4>
+                            <p class="text-lg text-text-light">AWS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Internships -->
+                <div>
+                    <h3 class="text-3xl font-semibold mb-6 text-accent-blue border-b border-text-muted/20 pb-2">Internships</h3>
+                    <div class="space-y-8">
+                        <!-- Internship Item 1 -->
+                        <div class="bg-secondary-dark p-6 rounded-xl shadow-lg border-l-4 border-accent-blue">
+                            <p class="text-sm font-medium text-text-muted mb-1">08/2023 - 09/2023</p>
+                            <h4 class="text-xl font-bold text-white">Data Science Intern</h4>
+                            <p class="text-lg text-text-light">CodeClause</p>
+                            <ul class="list-disc list-inside text-text-muted mt-3 space-y-1">
+                                <li>Developed **Python scripts** for data preprocessing and cleaning.</li>
+                                <li>Built small-scale **ETL pipelines** to automate data handling.</li>
+                                <li>Collaborated with the team to optimize backend workflows.</li>
+                            </ul>
+                        </div>
+                        <!-- Internship Item 2 -->
+                        <div class="bg-secondary-dark p-6 rounded-xl shadow-lg border-l-4 border-accent-blue">
+                            <p class="text-sm font-medium text-text-muted mb-1">08/2023 - 09/2023</p>
+                            <h4 class="text-xl font-bold text-white">Data Science Intern</h4>
+                            <p class="text-lg text-text-light">CodSoft</p>
+                            <ul class="list-disc list-inside text-text-muted mt-3 space-y-1">
+                                <li>Applied data preprocessing techniques to real-world datasets.</li>
+                                <li>Assisted in exploratory data analysis and feature engineering.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Contact Section -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-secondary-dark/50 my-12 rounded-xl mx-4 shadow-2xl text-center">
+            <h2 class="text-4xl font-bold text-center mb-4 text-white">Get In Touch</h2>
+            <p class="text-xl text-text-muted max-w-2xl mx-auto mb-10">
+                I am always open to discussing new projects, collaboration opportunities, and backend or data challenges. Feel free to reach out!
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8">
+                
+                <!-- Email -->
+                <div class="flex flex-col items-center">
+                    <a href="mailto:kerollloss@gmail.com" class="text-accent-blue hover:text-white transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <p class="mt-2 text-md text-text-muted">kerollloss@gmail.com</p>
+                </div>
+                
+                <!-- LinkedIn -->
+                <div class="flex flex-col items-center">
+                    <a href="https://www.linkedin.com/in/kerolloss/" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-white transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 0-6 6v7h4v-7a2 2 0 0 1 2-2 2 2 0 0 1 2 2v7h4v-7a6 6 0 0 0-6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <p class="mt-2 text-md text-text-muted">Kerollos Abdo</p>
+                </div>
+
+                <!-- Phone -->
+                <div class="flex flex-col items-center">
+                    <a href="tel:+201208988956" class="text-accent-blue hover:text-white transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.08 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </a>
+                    <p class="mt-2 text-md text-text-muted">+20 1208988956</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-dark/80 mt-12 py-8 text-center text-text-muted text-sm">
+        <p>&copy; <span id="current-year"></span> Kerollos AbdulMasih. Built with HTML, Tailwind CSS, and JavaScript.</p>
+    </footer>
+
+
+    <script>
+        // Data for Skills Section (Used for rendering and animation)
+        const skillsData = {
+            backend: [
+                { name: 'Node.js (Express.js)', level: '90%' },
+                { name: 'MySQL / PostgreSQL', level: '85%' },
+                { name: 'RESTful API Development', level: '90%' },
+                { name: 'Authentication & CRUD', level: '80%' },
+            ],
+            data: [
+                { name: 'SQL (Optimization & Procedures)', level: '90%' },
+                { name: 'Python (Data Preprocessing/Automation)', level: '85%' },
+                { name: 'Data Modeling & ETL Pipelines', level: '75%' },
+                { name: 'Machine Learning Basics (RF, LR)', level: '65%' },
+            ],
+            cloud: [
+                { name: 'AWS Cloud (Foundations)', level: '70%' },
+                { name: 'Git & Version Control', level: '85%' },
+                { name: 'Docker (Basic)', level: '50%' },
+            ]
+        };
+
+        // Data for Projects Section
+        const projectsData = [
+            {
+                title: "API Development with Node.js",
+                description: "Designing RESTful APIs for user and product management. Implemented CRUD operations and integrated with a MySQL database.",
+                tech: ["Node.js", "Express.js", "MySQL", "REST"],
+                github: "#" // Replace with actual GitHub link
+            },
+            {
+                title: "Eligibility Prediction for Loan",
+                description: "Developed a predictive model using Random Forest Classifier. Included preprocessing, hyperparameter tuning, and ROC curve evaluation.",
+                tech: ["Python", "Random Forest", "Scikit-learn", "Data Preprocessing"],
+                github: "#" // Replace with actual GitHub link
+            },
+            {
+                title: "Insurance Upgrades Data Prep",
+                description: "Cleaned and corrected customer data for a U.S.-based travel provider. Prepared datasets for a targeted insurance promotion campaign.",
+                tech: ["Python", "Data Cleaning", "Data Preprocessing", "ETL"],
+                github: "#" // Replace with actual GitHub link
+            },
+            {
+                title: "Database for Tech Company",
+                description: "Created a comprehensive Relational Database Model for a technology company, containing all critical user and product information.",
+                tech: ["SQL", "Data Modeling", "PostgreSQL/MySQL"],
+                github: "#" // Replace with actual GitHub link
+            },
+        ];
+
+        // --- Utility Functions ---
+
+        /**
+         * Renders the skill bar HTML for a given set of skills.
+         * @param {string} containerId - The ID of the container element (e.g., 'backend-skills').
+         * @param {Array<Object>} skills - Array of skill objects {name, level}.
+         */
+        function renderSkills(containerId, skills) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = skills.map(skill => `
+                <div class="skill-item">
+                    <p class="text-md text-text-light flex justify-between">
+                        <span>${skill.name}</span>
+                        <span class="text-accent-blue font-mono">${skill.level}</span>
+                    </p>
+                    <div class="h-2 bg-text-muted/20 rounded-full mt-1 overflow-hidden">
+                        <div class="skill-bar-inner h-full bg-accent-blue rounded-full"
+                             data-level="${skill.level}"
+                             style="--skill-level: ${skill.level};">
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        /**
+         * Renders the project cards into the projects container.
+         */
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            if (!container) return;
+
+            container.innerHTML = projectsData.map(project => `
+                <div class="project-card bg-secondary-dark p-6 rounded-xl shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold text-white">${project.title}</h3>
+                        <p class="text-text-muted">${project.description}</p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-2 my-4">
+                            ${project.tech.map(t => `<span class="text-xs font-medium bg-primary-dark text-accent-blue px-3 py-1 rounded-full">${t}</span>`).join('')}
+                        </div>
+                        <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-accent-blue hover:text-white transition duration-300 font-semibold mt-3">
+                            View Code
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Animates the skill bars when the skills section is visible.
+         */
+        function animateSkills(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Start animation when section is visible
+                    const skillBars = entry.target.querySelectorAll('.skill-bar-inner');
+                    skillBars.forEach(bar => {
+                        bar.classList.add('animate-skill-bar');
+                    });
+                    // Stop observing after animation starts
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+        
+        /**
+         * Toggles the visibility of the mobile navigation menu.
+         */
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /**
+         * Closes the mobile menu (used after a link is clicked).
+         */
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        }
+
+
+        // --- Initialization on Document Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initial Data Rendering
+            renderSkills('backend-skills', skillsData.backend);
+            renderSkills('data-skills', skillsData.data);
+            renderSkills('cloud-skills', skillsData.cloud);
+            renderProjects();
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // 2. Mobile Menu Setup
+            const mobileButton = document.getElementById('mobile-menu-button');
+            if (mobileButton) {
+                mobileButton.addEventListener('click', toggleMobileMenu);
+            }
+
+            // 3. Skill Bar Animation using Intersection Observer
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection) {
+                const observerOptions = {
+                    root: null, // relative to the viewport
+                    rootMargin: '0px',
+                    threshold: 0.2 // Trigger when 20% of the section is visible
+                };
+                const skillsObserver = new IntersectionObserver(animateSkills, observerOptions);
+                skillsObserver.observe(skillsSection);
+            }
+            
+            // 4. Initialize Lucide Icons
+            lucide.createIcons();
+
+            // 5. Scroll-based NavBar Effect (Optional: Add a small shadow on scroll)
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-2xl');
+                } else {
+                    navbar.classList.remove('shadow-2xl');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
