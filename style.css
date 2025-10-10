@@ -1,0 +1,91 @@
+/*
+ * style.css
+ * Contains Tailwind Configuration, Custom Utility Classes, and Theme Styles.
+ */
+
+/* 1. Tailwind Configuration Script */
+/* NOTE: This script must be inside the CSS file when using the CDN for proper loading */
+/* It defines custom colors and enables the 'light' class for light mode styling */
+
+
+/* 2. Custom CSS Styles */
+
+/* Base for smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Skill Bar Animation Setup */
+.skill-bar-inner {
+    width: 0; /* Initial width for animation */
+    transition: width 1.5s ease-out;
+}
+.animate-skill-bar {
+    /* This class will be added by JS to start the animation */
+    width: var(--skill-level) !important;
+}
+
+/* Style for project card hover effect */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+}
+
+/* 3. Light Mode Styles (Activated by the 'light' class on the body) */
+body.light {
+    /* Background and text colors */
+    background-color: var(--tw-colors-primary-light);
+    color: var(--tw-colors-text-dark);
+}
+
+.light .bg-primary-dark {
+    background-color: var(--tw-colors-primary-light);
+}
+.light .text-white {
+    color: var(--tw-colors-text-dark); /* Headings, bold text */
+}
+.light .text-text-light {
+    color: var(--tw-colors-text-dark); /* General text */
+}
+.light .text-text-muted {
+    color: var(--tw-colors-text-neutral); /* Muted text */
+}
+
+/* Section and Card Backgrounds */
+.light .bg-secondary-dark {
+    background-color: var(--tw-colors-secondary-light);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+.light .bg-secondary-dark\/95 {
+    background-color: rgba(240, 240, 240, 0.95); /* NavBar BG */
+    backdrop-filter: blur(8px);
+}
+.light .bg-secondary-dark\/80 {
+    background-color: rgba(240, 240, 240, 0.8); /* Footer BG */
+}
+.light .bg-secondary-dark\/50 {
+    background-color: rgba(240, 240, 240, 0.5); /* Striped Section BG */
+}
+
+/* Borders and Separators */
+.light .border-text-muted\/10 {
+    border-color: rgba(85, 85, 85, 0.1);
+}
+.light .border-text-muted\/20 {
+    border-color: rgba(85, 85, 85, 0.2);
+}
+
+/* Button/Link Hover Effects */
+.light .text-accent-blue:hover {
+    color: var(--tw-colors-text-dark); /* Ensure hover works in light mode */
+}
+.light .hover\:text-white:hover {
+    color: white; /* For the main CTA button */
+}
+
+.light .project-card:hover {
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.1); /* Lighter shadow for cards */
+}
